@@ -1,31 +1,137 @@
-.App {
+
+
+
+
+
+.container {
+  flex: 1;
+  display: flex; /* Sử dụng flexbox cho container */
+  padding-bottom: 50px; /* Điều chỉnh kích thước này theo chiều cao của footer */
+
+}
+
+
+
+/* ManagerDriverScreen.css */
+
+
+
+.manager-driver-screen h1 {
   text-align: center;
+  color: #333;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.tab-buttons {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.tab-buttons button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 0 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.tab-buttons button:hover {
+  background-color: #0056b3;
+}
+
+.tab-content {
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  flex-grow: 1; /* Chiếm toàn bộ không gian khả dụng còn lại */
+  overflow: auto; /* Nếu nội dung vượt quá kích thước, sẽ có thanh cuộn */
+}
+
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+ul li {
+  padding: 8px; 
+  border-bottom: 1px solid #ddd;
+}
+
+ul li:last-child {
+  border-bottom: none;
+}
+
+
+.menu-bar {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  gap: 12px; /* Khoảng cách giữa các nút */
+  padding: 20px;
+  background-color: #f8f9fa; /* Màu nền nhẹ cho toàn bộ menu */
+  border-radius: 8px; /* Tạo các góc bo tròn cho menu */
+  height: 100%; /* Lấp đầy chiều cao của phần tử chứa */
+
+  width:150; /* Đặt chiều rộng cố định */
 }
 
+.menu-bar button {
+  padding: 12px 16px; /* Đệm dọc và ngang cho nút */
+  background-color: #ffffff; /* Màu nền trắng cho nút */
+  color: #333; /* Màu chữ đen nhạt */
+  border: 1px solid #ddd; /* Viền xám nhẹ */
+  border-radius: 4px; /* Bo tròn nhẹ cho nút */
+  font-weight: 500;
+  cursor: pointer;
+  text-align: left; /* Căn trái cho nội dung */
+  transition: background-color 0.3s, box-shadow 0.3s; /* Hiệu ứng chuyển màu và đổ bóng */
+  width: 100%; /* Chiếm toàn bộ chiều ngang của menu-bar */
+}
+
+/* Thay đổi màu nền khi nút được nhấn */
+.menu-bar button.bg-blue-200 {
+  background-color: #cce4ff; /* Màu nền khi nút được chọn */
+}
+
+.menu-bar button:hover {
+  background-color: #f1f1f1; /* Đổi màu nền khi hover */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Đổ bóng nhẹ khi hover */
+}
+
+
+
+
+.content {
+  flex: 1;
+  padding: 10px;
+  max-height: 80vh; /* Giới hạn chiều cao của phần nội dung */
+  overflow-y: auto; /* Chỉ cho phép cuộn theo chiều dọc */
+  padding: 20px; /* Tùy chọn: thêm khoảng cách để nội dung thoáng hơn */
+  width: 100%; /* Đảm bảo phần content chiếm đủ chiều rộng */
+
+}
 .App-link {
   color: #61dafb;
+}
+.title-layer {
+  position: absolute; /* Đặt vị trí tuyệt đối */
+  top: 20px; /* Khoảng cách từ trên cùng */
+  left: 20px; /* Khoảng cách từ bên trái */
+  z-index: 9999; /* Đặt z-index lớn để đảm bảo nó nằm trên các phần tử khác */
+  background-color: rgba(255, 255, 255, 0.8); /* Nền trắng trong suốt */
+  padding: 10px; /* Padding cho tiêu đề */
+  border-radius: 5px; /* Bo tròn các góc */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); /* Đổ bóng cho lớp */
+}
+
+.title-layer h1 {
+  margin: 0; /* Xóa margin mặc định */
+  font-size: 24px; /* Kích thước chữ */
+  color: #333; /* Màu chữ */
 }
 
 @keyframes App-logo-spin {
@@ -35,4 +141,573 @@
   to {
     transform: rotate(360deg);
   }
+}
+.manager-driver-screen {
+  display: flex;
+  flex-direction: column;
+  width: 100%;                 /* Chiếm toàn bộ chiều rộng */
+  box-sizing: border-box;      /* Đảm bảo padding và border được tính vào kích thước */ 
+  min-height: 100vh;           /* Đảm bảo chiều cao tối thiểu bằng chiều cao của viewport */
+}
+
+
+/* Cũng nên kiểm tra và định nghĩa cho các phần tử con */
+.tab-buttons {
+  margin-bottom: 20px;         /* Tạo khoảng cách giữa nút và nội dung */
+}
+
+.tab-content {
+  flex: 1;                     /* Cho phép phần nội dung chiếm không gian còn lại */
+  overflow: auto;              /* Thêm cuộn nếu nội dung vượt quá chiều cao */
+}
+.App {
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* Chiếm toàn bộ chiều cao màn hình */
+  width: 100vw; /* Chiếm toàn bộ chiều rộng màn hình */
+}
+
+.App-header {
+  padding: 10px;
+  font-size: 1.5rem;
+  text-align: center;
+  background-color: #4CAF50; /* Màu nền cho header */
+  position: fixed; /* Fix header ở trên cùng */
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000; /* Đảm bảo header nằm trên các phần tử khác */
+  width: 100%;
+}
+
+.App-body {
+  display: flex;
+  flex: 1;
+  margin-top: 60px; /* Đảm bảo phần thân có khoảng cách dưới header */
+}
+
+.MenuBar {
+  width: 250px; /* Chiều rộng của menu bên trái */
+  background-color: #f4f4f4;
+  padding: 15px;
+  box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.1); /* Tạo bóng cho menu */
+  position: fixed;
+  top: 60px; /* Đẩy xuống dưới header */
+  left: 0;
+  bottom: 50px; /* Chiều cao của footer */
+  overflow-y: auto; /* Thêm khả năng cuộn cho menu nếu cần */
+}
+
+.App-body > div {
+  flex: 1; /* Chiếm phần còn lại của màn hình */
+
+  overflow-y: auto; /* Cho phép cuộn khi nội dung dài */
+  height: calc(100vh - 60px - 50px); /* Chiều cao body bằng chiều cao màn hình trừ chiều cao header và footer */
+}
+
+.App-footer {
+  color: white;
+  height: 50px;
+  width: 100%;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  background-color: #282c34;
+  text-align: center;
+  z-index: 1000; /* Đảm bảo footer nằm trên các phần tử khác */
+}
+
+.App-content {
+  margin-left: 250px; /* Đẩy nội dung chính sang phải để tránh MenuBar */
+  flex-grow: 1; /* Chiếm toàn bộ không gian còn lại */
+  overflow-y: auto; /* Cho phép cuộn dọc nếu nội dung vượt quá chiều cao */
+  padding: 20px; 
+  
+}
+.custom-text {
+  font-size: 1.25rem; /* Tăng kích thước chữ */
+  font-weight: 500; /* Tùy chọn thay đổi độ đậm của chữ */
+}
+form {
+  width: 95%; /* Chiếm hết chiều rộng của vùng chứa */
+  margin: 0 auto;
+  padding: 20px;
+  margin: 0 auto; /* Căn giữa form */
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+form h4 {
+  margin-top: 20px;
+  color: #333;
+  font-size: 1.2rem;
+}
+form input {
+  width: 95%;
+  padding: 10px;
+  margin: 8px 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  
+  font-size: 1rem;
+}
+/* Placeholder */
+form input::placeholder {
+  color: #999;
+}
+form select {
+width: 95%;
+  padding: 10px;
+  margin: 8px 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  
+  font-size: 1rem;
+}
+
+/* Placeholder cho select */
+form select:disabled {
+  color: #999;
+}
+
+
+/* Style cho các input kiểu number */
+/* form input[type="number"] {
+  -moz-appearance: textfield;
+} */
+
+form input[type="number"]::-webkit-outer-spin-button,
+
+
+form input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Các button */
+form button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin: 15px;
+  transition: background-color 0.3s ease;
+}
+
+form button:hover {
+  background-color: #45a049;
+}
+
+/* Nút huỷ */
+form button[type="button"] {
+  background-color: #f44336;
+}
+
+form button[type="button"]:hover {
+  background-color: #e53935;
+}
+
+/* Style cho các nhóm input */
+form .input-group {
+  margin-bottom: 15px;
+}
+
+/* Các input nhóm bên trong phần cấm giờ và sức chứa */
+form .input-group input {
+  width: calc(50% - 10px);
+  margin-right: 10px;
+}
+
+form .input-group input:last-child {
+  margin-right: 0;
+}
+
+@media (max-width: 600px) {
+  /* Điều chỉnh layout cho thiết bị di động */
+  form .input-group input {
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+}
+/* Phần tiêu đề cho mỗi danh sách */
+h2 {
+  font-size: 1.6rem;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+/* Danh sách tài xế */
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+ul li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  margin: 8px 0;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Tên tài xế */
+ul li strong {
+  font-size: 1.1rem;
+  color: #333;
+  font-weight: bold;
+}
+
+/* Button */
+ul li button {
+  padding: 8px 16px;
+  margin-left: 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease;
+}
+
+ul li button:hover {
+  background-color: #45a049;
+}
+
+ul li button:active {
+  background-color: #388e3c;
+}
+
+/* Button Xoá */
+ul li button:nth-child(2) {
+  background-color: #f44336;
+}
+
+ul li button:nth-child(2):hover {
+  background-color: #e53935;
+}
+
+ul li button:nth-child(2):active {
+  background-color: #c62828;
+}
+
+/* Màu sắc cho các danh sách */
+h2 + ul {
+  margin-top: 20px;
+}
+
+h2:before {
+  content: "•";
+  color: #3f51b5;
+  font-size: 1.5rem;
+  padding-right: 10px;
+}
+
+ul li {
+  background-color: #fff;
+}
+
+ul li.active {
+  background-color: #e8f5e9;
+}
+
+ul li.inactive {
+  background-color: #fff3e0;
+}
+
+ul li.suspended {
+  background-color: #ffebee;
+}
+
+/* Tạo sự khác biệt giữa các trạng thái tài xế */
+h2.active {
+  color: #388e3c;
+}
+
+h2.inactive {
+  color: #ff9800;
+}
+
+h2.suspended {
+  color: #f44336;
+}
+.driver-info {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Khoảng cách giữa ảnh và tên */
+}
+
+.driver-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%; /* Để ảnh thành hình tròn */
+  object-fit: cover; /* Cắt ảnh sao cho không bị méo */
+}
+
+
+
+/* Container cho select */
+.select-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+/* Style cho nhãn của select */
+.select-label {
+  color: #999;
+  font-size: 14px;
+  margin-bottom: 5px;
+  text-align: left;
+}
+
+/* Style cho select */
+.select-field {
+  width: 100%;  /* Chiếm toàn bộ chiều rộng của container */
+  padding: 10px; /* Padding cho select */
+  font-size: 16px;  /* Kích thước chữ */
+  border: 1px solid #ccc; /* Màu viền nhạt */
+  border-radius: 5px; /* Bo góc select */
+  outline: none; /* Bỏ viền khi focus */
+  box-sizing: border-box; /* Đảm bảo padding và border được tính trong chiều rộng */
+  transition: border-color 0.3s ease-in-out; /* Thêm hiệu ứng khi focus */
+}
+
+/* Hiệu ứng khi select được focus */
+.select-field:focus {
+  border-color: #4CAF50; /* Màu viền khi focus */
+}
+
+
+/* Container chính */
+.truck-info {
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 20px 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: left; 
+  display: flex;
+}
+
+/* Tên xe */
+.truck-name {
+  font-size: 22px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+/* Chi tiết xe */
+.truck-details p {
+  margin: 10px 0;
+  font-size: 16px;
+  color: #444;
+}
+
+.truck-details strong {
+  color: #555;
+  font-weight: 600;
+}
+
+/* Dịch vụ hỗ trợ, Chi tiết bốc dỡ, Loại thùng */
+.truck-details span {
+  color: #0073e6;
+  font-weight: 500;
+}
+
+.truck-details p::before {
+  content: "• ";
+  color: #0073e6;
+  font-size: 18px;
+  font-weight: bold;
+  display: inline-block;
+  margin-right: 5px;
+}
+
+.truck-details p {
+  padding-left: 10px;
+}
+
+/* Thẻ nhỏ cho dịch vụ hỗ trợ, chi tiết bốc dỡ và loại thùng */
+.truck-details .service,
+.truck-details .unloading,
+.truck-details .box {
+  display: inline-block;
+  padding: 2px 8px;
+  margin-right: 5px;
+  margin-top: 5px;
+  background-color: #f1faff;
+  border-radius: 5px;
+  font-size: 14px;
+  color: #0073e6;
+}
+/* Container hình ảnh */
+.truck-image {
+  width: 100%;
+  max-width: 400px; /* Điều chỉnh kích thước tối đa của hình ảnh */
+  margin: 0 auto 20px; /* Căn giữa và thêm khoảng cách bên dưới */
+  text-align: center; /* Căn giữa hình ảnh trong container */
+}
+
+/* Hình ảnh */
+.truck-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px; /* Bo tròn góc ảnh */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Đổ bóng nhẹ */
+}
+/* Đảm bảo container chiếm toàn bộ chiều rộng */
+.container-xl {
+  width: 100%; 
+  max-width: 100%;
+ 
+}
+
+/* Wrapper của bảng */
+.table-wrapper {
+  width: 100%;
+  height: 100%;
+  margin-top: 20px;
+  max-width: 100%;
+  background-color: #fff;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  
+}
+.table-container {
+  max-height: 500px; /* Chiều cao tối đa của bảng */
+  overflow-y: auto;  /* Thêm thanh cuộn dọc nếu nội dung vượt quá chiều cao */
+}
+
+/* Tiêu đề bảng */
+.table-title {
+  width: 100%;
+  height: 100%;
+  padding: 15px;
+  background-color: #f4f4f4;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Căn chỉnh các button ở bên phải */
+.table-title .col-sm-7 {
+  text-align: right; /* Đặt các button về phía bên phải */
+}
+
+
+table {
+  width: 100%;
+  margin-bottom: 20px;
+  border-collapse: collapse; /* Loại bỏ khoảng cách giữa các cell */
+}
+
+table th, table td {
+  padding: 12px 15px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+table th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+
+/* Thiết lập hiển thị cho các button */
+.btn {
+  padding: 8px 12px;
+  margin: 5px;
+  cursor: pointer;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268;
+}
+
+/* Pagination */
+.clearfix {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.hint-text {
+  font-size: 14px;
+  color: #777;
+}
+
+/* Responsive điều chỉnh cho bảng trên các thiết bị nhỏ */
+@media (max-width: 768px) {
+  table thead {
+    display: none; /* Ẩn tiêu đề trên màn hình nhỏ */
+  }
+  
+  table, 
+  table tbody, 
+  table tr, 
+  table td {
+    display: block;
+    width: 100%;
+  }
+
+  table td {
+    text-align: right;
+    position: relative;
+    padding-left: 50%;
+  }
+
+  table td:before {
+    content: attr(data-label);
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+  }
+}
+.avatar {
+  width: 60px; /* Kích thước của avatar */
+  height: 60px; /* Kích thước của avatar */
+  border-radius: 50%; /* Tạo hình tròn */
+  object-fit: cover; /* Đảm bảo ảnh không bị méo */
+  margin-right: 10px; /* Khoảng cách giữa ảnh và tên */
+}
+
+
+/* CSS để cho phép kéo và thay đổi kích thước cột */
+th, td {
+  padding: 10px;
+  text-align: left;
+  resize: horizontal;
+  overflow: hidden;
+  min-width: 50px;  /* Giới hạn độ rộng tối thiểu của cột */
+}
+
+/* Đảm bảo các cột không bị tràn ra ngoài khi có sự thay đổi kích thước */
+
+.media-container {
+  display: flex;
+  flex-direction: column;  /* Đặt các phần tử theo chiều dọc */
+  align-items: center;     /* Căn giữa các phần tử ngang */
+  text-align: center;      /* Căn giữa văn bản */
 }
