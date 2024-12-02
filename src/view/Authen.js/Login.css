@@ -125,7 +125,9 @@ form .btn .btn-layer {
   width: 300%;
   position: absolute;
   left: -100%;
-  background: linear-gradient(right, #a445b2, #fa4299, #a445b2, #fa4299);
+ /* eslint-disable-next-line */
+background: linear-gradient(right, #fff, #000);
+
   border-radius: 5px;
   transition: all 0.4s ease;
 }

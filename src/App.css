@@ -1,20 +1,10 @@
-
-
-
-
-
 .container {
   flex: 1;
   display: flex; /* Sử dụng flexbox cho container */
   padding-bottom: 50px; /* Điều chỉnh kích thước này theo chiều cao của footer */
-
 }
 
-
-
 /* ManagerDriverScreen.css */
-
-
 
 .manager-driver-screen h1 {
   text-align: center;
@@ -43,7 +33,7 @@
 }
 
 .tab-content {
-  padding: 20px;
+ 
   border: 1px solid #ccc;
   border-radius: 5px;
   background-color: #fff;
@@ -51,21 +41,19 @@
   overflow: auto; /* Nếu nội dung vượt quá kích thước, sẽ có thanh cuộn */
 }
 
-
 ul {
   list-style-type: none;
   padding: 0;
 }
 
 ul li {
-  padding: 8px; 
+  padding: 8px;
   border-bottom: 1px solid #ddd;
 }
 
 ul li:last-child {
   border-bottom: none;
 }
-
 
 .menu-bar {
   display: flex;
@@ -76,7 +64,7 @@ ul li:last-child {
   border-radius: 8px; /* Tạo các góc bo tròn cho menu */
   height: 100%; /* Lấp đầy chiều cao của phần tử chứa */
 
-  width:150; /* Đặt chiều rộng cố định */
+  width: 150; /* Đặt chiều rộng cố định */
 }
 
 .menu-bar button {
@@ -102,9 +90,6 @@ ul li:last-child {
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Đổ bóng nhẹ khi hover */
 }
 
-
-
-
 .content {
   flex: 1;
   padding: 10px;
@@ -112,7 +97,6 @@ ul li:last-child {
   overflow-y: auto; /* Chỉ cho phép cuộn theo chiều dọc */
   padding: 20px; /* Tùy chọn: thêm khoảng cách để nội dung thoáng hơn */
   width: 100%; /* Đảm bảo phần content chiếm đủ chiều rộng */
-
 }
 .App-link {
   color: #61dafb;
@@ -145,21 +129,17 @@ ul li:last-child {
 .manager-driver-screen {
   display: flex;
   flex-direction: column;
-  width: 100%;                 /* Chiếm toàn bộ chiều rộng */
-  box-sizing: border-box;      /* Đảm bảo padding và border được tính vào kích thước */ 
-  min-height: 100vh;           /* Đảm bảo chiều cao tối thiểu bằng chiều cao của viewport */
+  width: 100%; /* Chiếm toàn bộ chiều rộng */
+  box-sizing: border-box; /* Đảm bảo padding và border được tính vào kích thước */
+  min-height: 100vh; /* Đảm bảo chiều cao tối thiểu bằng chiều cao của viewport */
 }
-
 
 /* Cũng nên kiểm tra và định nghĩa cho các phần tử con */
 .tab-buttons {
-  margin-bottom: 20px;         /* Tạo khoảng cách giữa nút và nội dung */
+  margin-bottom: 20px; /* Tạo khoảng cách giữa nút và nội dung */
 }
 
-.tab-content {
-  flex: 1;                     /* Cho phép phần nội dung chiếm không gian còn lại */
-  overflow: auto;              /* Thêm cuộn nếu nội dung vượt quá chiều cao */
-}
+
 .App {
   display: flex;
   flex-direction: column;
@@ -168,16 +148,17 @@ ul li:last-child {
 }
 
 .App-header {
-  padding: 10px;
+  display: flex; /* Sử dụng Flexbox để căn chỉnh các phần tử */
+  justify-content: space-between; /* Đẩy các phần tử con ra ngoài cùng (tiêu đề sang trái và nút sang phải) */
+  align-items: center; /* Căn giữa các phần tử theo chiều dọc */
+  padding: 10px 20px; /* Thêm một chút padding để các phần tử không chạm vào nhau */
   font-size: 1.5rem;
-  text-align: center;
-  background-color: #4CAF50; /* Màu nền cho header */
+  background-color: #4caf50; /* Màu nền cho header */
   position: fixed; /* Fix header ở trên cùng */
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000; /* Đảm bảo header nằm trên các phần tử khác */
-  width: 100%;
+  top: 0; /* Đặt vị trí ở trên cùng */
+  left: 0; /* Đặt vị trí ở bên trái */
+  right: 0; /* Đặt vị trí ở bên phải */
+  z-index: 1000;
 }
 
 .App-body {
@@ -202,7 +183,9 @@ ul li:last-child {
   flex: 1; /* Chiếm phần còn lại của màn hình */
 
   overflow-y: auto; /* Cho phép cuộn khi nội dung dài */
-  height: calc(100vh - 60px - 50px); /* Chiều cao body bằng chiều cao màn hình trừ chiều cao header và footer */
+  height: calc(
+    100vh - 60px - 50px
+  ); /* Chiều cao body bằng chiều cao màn hình trừ chiều cao header và footer */
 }
 
 .App-footer {
@@ -221,8 +204,7 @@ ul li:last-child {
   margin-left: 250px; /* Đẩy nội dung chính sang phải để tránh MenuBar */
   flex-grow: 1; /* Chiếm toàn bộ không gian còn lại */
   overflow-y: auto; /* Cho phép cuộn dọc nếu nội dung vượt quá chiều cao */
-  padding: 20px; 
-  
+  padding: 20px;
 }
 .custom-text {
   font-size: 1.25rem; /* Tăng kích thước chữ */
@@ -249,7 +231,7 @@ form input {
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
-  
+
   font-size: 1rem;
 }
 /* Placeholder */
@@ -257,13 +239,13 @@ form input::placeholder {
   color: #999;
 }
 form select {
-width: 95%;
+  width: 95%;
   padding: 10px;
   margin: 8px 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
-  
+
   font-size: 1rem;
 }
 
@@ -272,15 +254,12 @@ form select:disabled {
   color: #999;
 }
 
-
 /* Style cho các input kiểu number */
 /* form input[type="number"] {
   -moz-appearance: textfield;
 } */
 
 form input[type="number"]::-webkit-outer-spin-button,
-
-
 form input[type="number"]::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
@@ -288,7 +267,7 @@ form input[type="number"]::-webkit-inner-spin-button {
 
 /* Các button */
 form button {
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: white;
   padding: 10px 20px;
   border: none;
@@ -374,7 +353,7 @@ ul li strong {
 ul li button {
   padding: 8px 16px;
   margin-left: 10px;
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: white;
   border: none;
   border-radius: 4px;
@@ -457,8 +436,6 @@ h2.suspended {
   object-fit: cover; /* Cắt ảnh sao cho không bị méo */
 }
 
-
-
 /* Container cho select */
 .select-container {
   display: flex;
@@ -476,9 +453,9 @@ h2.suspended {
 
 /* Style cho select */
 .select-field {
-  width: 100%;  /* Chiếm toàn bộ chiều rộng của container */
+  width: 100%; /* Chiếm toàn bộ chiều rộng của container */
   padding: 10px; /* Padding cho select */
-  font-size: 16px;  /* Kích thước chữ */
+  font-size: 16px; /* Kích thước chữ */
   border: 1px solid #ccc; /* Màu viền nhạt */
   border-radius: 5px; /* Bo góc select */
   outline: none; /* Bỏ viền khi focus */
@@ -488,9 +465,8 @@ h2.suspended {
 
 /* Hiệu ứng khi select được focus */
 .select-field:focus {
-  border-color: #4CAF50; /* Màu viền khi focus */
+  border-color: #4caf50; /* Màu viền khi focus */
 }
-
 
 /* Container chính */
 .truck-info {
@@ -500,7 +476,7 @@ h2.suspended {
   padding: 20px;
   margin: 20px 0;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  text-align: left; 
+  text-align: left;
   display: flex;
 }
 
@@ -573,9 +549,8 @@ h2.suspended {
 }
 /* Đảm bảo container chiếm toàn bộ chiều rộng */
 .container-xl {
-  width: 100%; 
+  width: 100%;
   max-width: 100%;
- 
 }
 
 /* Wrapper của bảng */
@@ -588,11 +563,10 @@ h2.suspended {
   border-radius: 8px;
   border: 1px solid #ddd;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  
 }
 .table-container {
   max-height: 500px; /* Chiều cao tối đa của bảng */
-  overflow-y: auto;  /* Thêm thanh cuộn dọc nếu nội dung vượt quá chiều cao */
+  overflow-y: auto; /* Thêm thanh cuộn dọc nếu nội dung vượt quá chiều cao */
 }
 
 /* Tiêu đề bảng */
@@ -609,14 +583,14 @@ h2.suspended {
   text-align: right; /* Đặt các button về phía bên phải */
 }
 
-
 table {
   width: 100%;
   margin-bottom: 20px;
   border-collapse: collapse; /* Loại bỏ khoảng cách giữa các cell */
 }
 
-table th, table td {
+table th,
+table td {
   padding: 12px 15px;
   text-align: left;
   border: 1px solid #ddd;
@@ -663,10 +637,10 @@ table th {
   table thead {
     display: none; /* Ẩn tiêu đề trên màn hình nhỏ */
   }
-  
-  table, 
-  table tbody, 
-  table tr, 
+
+  table,
+  table tbody,
+  table tr,
   table td {
     display: block;
     width: 100%;
@@ -693,21 +667,21 @@ table th {
   margin-right: 10px; /* Khoảng cách giữa ảnh và tên */
 }
 
-
 /* CSS để cho phép kéo và thay đổi kích thước cột */
-th, td {
+th,
+td {
   padding: 10px;
   text-align: left;
   resize: horizontal;
   overflow: hidden;
-  min-width: 50px;  /* Giới hạn độ rộng tối thiểu của cột */
+  min-width: 50px; /* Giới hạn độ rộng tối thiểu của cột */
 }
 
 /* Đảm bảo các cột không bị tràn ra ngoài khi có sự thay đổi kích thước */
 
 .media-container {
   display: flex;
-  flex-direction: column;  /* Đặt các phần tử theo chiều dọc */
-  align-items: center;     /* Căn giữa các phần tử ngang */
-  text-align: center;      /* Căn giữa văn bản */
+  flex-direction: column; /* Đặt các phần tử theo chiều dọc */
+  align-items: center; /* Căn giữa các phần tử ngang */
+  text-align: center; /* Căn giữa văn bản */
 }

@@ -1,0 +1,92 @@
+/* Cấu hình chung */
+.container {
+  width: 100%;
+  /* margin: 30px auto; */
+}
+
+.table-wrapper {
+  background: #fff;
+  /* padding: 20px; */
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.table-title {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.table-title h2 {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.table-title .btn {
+  padding: 8px 16px;
+  font-size: 14px;
+}
+
+.table-title .btn i {
+  margin-right: 5px;
+}
+
+/* Giao diện bảng */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table th,
+table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+table th {
+  background-color: #f4f4f4;
+  font-weight: 600;
+}
+
+table tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Style cho checkbox */
+table th input[type="checkbox"],
+table td input[type="checkbox"] {
+  transform: scale(1.2);
+}
+
+/* Style cho các nút Sửa, Xóa */
+table .btn-sm {
+  padding: 4px 10px;
+  font-size: 12px;
+  margin-right: 5px;
+  border-radius: 5px;
+}
+
+table .btn-warning {
+  background-color: #ffc107;
+  color: #fff;
+}
+
+table .btn-warning:hover {
+  background-color: #e0a800;
+}
+
+table .btn-danger {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+table .btn-danger:hover {
+  background-color: #c82333;
+}
+
+/* Các hiệu ứng hover */
+.table tbody tr:hover .btn {
+  opacity: 0.7;
+}

@@ -23,13 +23,13 @@ const ManagerDriverScreen = () => {
   };
 
   return (
-    <div className="manager-driver-screen">
+    <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
      
       <div className="tab-buttons">
         <button onClick={() => setActiveTab('drivers')}>Danh sách tài xế</button>
         <button onClick={() => setActiveTab('statistics')}>Theo dõi tài xế</button>
       </div>
-      <div className="tab-content">
+      <div>
         {renderContent()}
       </div>
     </div>

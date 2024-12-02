@@ -1,30 +1,38 @@
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 function useAuthViewModel() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [loading, setLoading] = useState(true);  // Thêm biến loading để chờ kiểm tra token
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   const checkToken = () => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     console.log(token);
 
     if (token) {
-      setIsAuthenticated(true); // Nếu có token, thì xác thực là true
+      setIsAuthenticated(true);
+      navigate("/");
     } else {
-      setIsAuthenticated(false); // Nếu không có token, thì xác thực là false
-      navigate('/login'); // Chuyển hướng đến trang login nếu không có token
+      setIsAuthenticated(false);
+      navigate("/login");
     }
-    setLoading(false); // Đánh dấu là đã kiểm tra xong
+    setLoading(false);
   };
 
   useEffect(() => {
     checkToken();
-  }, []); // Chạy một lần khi component được render lần đầu tiên
+    const handleStorageChange = () => {
+      checkToken();
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+    };
+  }, []);
 
   return { isAuthenticated, loading };
 }
 
 export default useAuthViewModel;
-
