@@ -92,7 +92,7 @@ class VoucherViewModel {
       // Kiểm tra phản hồi từ API
       if (response.statusCode === 200 && response.data) {
         console.log("Voucher updated successfully:", response.data);
-        return response; // Trả về dữ liệu cập nhật (nếu cần)
+        return response.data; // Trả về dữ liệu cập nhật (nếu cần)
       } else {
         throw new Error("No data returned from the server");
       }

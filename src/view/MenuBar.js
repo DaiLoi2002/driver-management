@@ -81,6 +81,42 @@ function MenuBar({ onSelectOption }) {
         <span className="custom-text">Quản Lý Voucher</span>{" "}
         {/* Sử dụng custom-text */}
       </button>
+      <button
+        className={`menu-item flex items-center gap-4 p-3 hover:bg-gray-200 transition-colors ${
+          selectedOption === "option6" ? "bg-blue-200" : ""
+        }`}
+        onClick={() => handleSelectOption("option6")}
+      >
+        <div className="mr-4">
+          <Ticket />
+        </div>
+        <span className="custom-text">Thống kê doanh thu</span>{" "}
+        {/* Sử dụng custom-text */}
+      </button>
+      <button
+        className={`menu-item flex items-center gap-4 p-3 hover:bg-gray-200 transition-colors ${
+          selectedOption === "option7" ? "bg-blue-200" : ""
+        }`}
+        onClick={() => handleSelectOption("option7")}
+      >
+        <div className="mr-4">
+          <Ticket />
+        </div>
+        <span className="custom-text">Thống kê đơn hàng</span>{" "}
+        {/* Sử dụng custom-text */}
+      </button>
+      <button
+        className={`menu-item flex items-center gap-4 p-3 hover:bg-gray-200 transition-colors ${
+          selectedOption === "option8" ? "bg-blue-200" : ""
+        }`}
+        onClick={() => handleSelectOption("option8")}
+      >
+        <div className="mr-4">
+          <Ticket />
+        </div>
+        <span className="custom-text">Thống kê doanh thu tài xế</span>{" "}
+        {/* Sử dụng custom-text */}
+      </button>
     </div>
   );
 }

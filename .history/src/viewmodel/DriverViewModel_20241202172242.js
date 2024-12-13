@@ -32,9 +32,15 @@ class DriverViewModel {
   }
   async getAllTruck() {
     try {
+      if (!driverData.password) {
+        console.error("Password is missing");
+      } else {
+        console.log("Password is:", driverData.password);
+      }
+
       // Đảm bảo driverData có trường type
       const newDriver = await BaseApi.post("admin/getAllTrucks");
-
+      this.drivers.push(newDriver);
       return newDriver; // Trả về dữ liệu tài xế đã thêm
     } catch (error) {
       console.error("Error adding driver:", error);
@@ -104,7 +110,7 @@ class DriverViewModel {
   // Hàm sửa tài xế
   async updateDriver(driver) {
     try {
-      console.log("Viewmodel", driver);
+      console.log(driver);
       // Kiểm tra xem driver có tất cả các thông tin cần thiết không
       if (
         !driver.id ||

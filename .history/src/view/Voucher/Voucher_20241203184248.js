@@ -45,7 +45,7 @@ const VoucherManagement = () => {
   useEffect(() => {
     fetchVouchers();
   }, [userGroup, isActive]);
-
+  // Cập nhật thông tin voucher (ví dụ như tên voucher)
   const handleUpdateVoucher = async () => {
     try {
       const updatedVoucher = {
@@ -77,7 +77,7 @@ const VoucherManagement = () => {
       // Gọi hàm UpdateVoucher để gửi yêu cầu API
       const updatedVoucherResponse =
         await voucherViewModel.ToggleVoucherActivation(code);
-      alert(updatedVoucherResponse.message);
+      console.log("ok");
       fetchVouchers();
     } catch (error) {
       console.error("Error updating voucher:", error.message);
@@ -334,7 +334,7 @@ const VoucherManagement = () => {
                       toggleVoucherStatus(voucher._id);
                     }}
                     style={{
-                      backgroundColor: voucher.isActive ? "red" : " green", // Màu nền tùy vào trạng thái
+                      backgroundColor: voucher.isActive ? "green" : "red", // Màu nền tùy vào trạng thái
                       color: "white", // Màu chữ
                     }}
                   >

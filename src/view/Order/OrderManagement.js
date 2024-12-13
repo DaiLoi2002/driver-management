@@ -14,7 +14,7 @@ const OrderManagement = () => {
   const [editMode, setEditMode] = useState(false);
   const [editOrderId, setEditOrderId] = useState(null);
   const [orders, setOrders] = useState([]); // Trạng thái lưu danh sách đơn hàng
-  const [status, setStatus] = useState("pending"); // Trạng thái động
+  const [status, setStatus] = useState("waiting"); // Trạng thái động
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const orderViewModel = new OrderViewModel();
@@ -97,8 +97,8 @@ const OrderManagement = () => {
             borderRadius: "5px",
           }}
         >
-          <option value="pending">Đang chờ</option>
-          <option value="is_proess">Đang thực hiện</option>
+          <option value="waiting">Đang chờ</option>
+
           <option value="cancelled">Đã huỷ</option>
           <option value="completed">Hoàn thành</option>
         </select>

@@ -30,17 +30,6 @@ class DriverViewModel {
       throw error; // Ném lỗi lên để xử lý trong component
     }
   }
-  async getAllTruck() {
-    try {
-      // Đảm bảo driverData có trường type
-      const newDriver = await BaseApi.post("admin/getAllTrucks");
-
-      return newDriver; // Trả về dữ liệu tài xế đã thêm
-    } catch (error) {
-      console.error("Error adding driver:", error);
-      throw error; // Ném lỗi lên để xử lý trong component
-    }
-  }
 
   async getDrivers() {
     try {
@@ -104,7 +93,7 @@ class DriverViewModel {
   // Hàm sửa tài xế
   async updateDriver(driver) {
     try {
-      console.log("Viewmodel", driver);
+      console.log(driver);
       // Kiểm tra xem driver có tất cả các thông tin cần thiết không
       if (
         !driver.id ||

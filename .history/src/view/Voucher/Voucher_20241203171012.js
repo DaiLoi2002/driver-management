@@ -35,36 +35,20 @@ const VoucherManagement = () => {
     setIsModalOpen(false);
     setSelectedVoucher(null);
   };
-  const fetchVouchers = async () => {
-    const fetchedVouchers = await voucherViewModel.getVoucher(
-      userGroup,
-      isActive
-    );
-    setVouchers(fetchedVouchers);
-  };
-  useEffect(() => {
-    fetchVouchers();
-  }, [userGroup, isActive]);
 
+  // Cập nhật thông tin voucher (ví dụ như tên voucher)
   const handleUpdateVoucher = async () => {
     try {
-      const updatedVoucher = {
-        ...selectedVoucher,
-        voucherId: selectedVoucher._id, // Đổi tên
-      };
-      delete updatedVoucher._id; // Loại bỏ _id để không gửi tới backend
-
-      console.log("Updating voucher", updatedVoucher);
+      // Xử lý cập nhật voucher ở đây
+      console.log("Updating voucher", selectedVoucher);
 
       // Gọi hàm UpdateVoucher để gửi yêu cầu API
       const updatedVoucherResponse = await voucherViewModel.UpdateVoucher(
-        updatedVoucher
+        selectedVoucher
       );
 
       // Nếu API cập nhật thành công, đóng modal
       console.log("Voucher updated successfully:", updatedVoucherResponse);
-      alert("Voucher đã được sửa thành công!");
-      fetchVouchers();
       closeModal(); // Đóng modal sau khi cập nhật thành công
     } catch (error) {
       console.error("Error updating voucher:", error.message);
@@ -72,17 +56,20 @@ const VoucherManagement = () => {
       alert("Failed to update voucher: " + error.message);
     }
   };
-  const toggleVoucherStatus = async (code) => {
-    try {
-      // Gọi hàm UpdateVoucher để gửi yêu cầu API
-      const updatedVoucherResponse =
-        await voucherViewModel.ToggleVoucherActivation(code);
-      alert(updatedVoucherResponse.message);
-      fetchVouchers();
-    } catch (error) {
-      console.error("Error updating voucher:", error.message);
-    }
 
+  useEffect(() => {
+    const fetchVouchers = async () => {
+      const fetchedVouchers = await voucherViewModel.getVoucher(
+        userGroup,
+        isActive
+      );
+      setVouchers(fetchedVouchers);
+    };
+
+    fetchVouchers();
+  }, [userGroup, isActive]);
+
+  const toggleVoucherStatus = (code) => {
     setVouchers((prevVouchers) =>
       prevVouchers.map((voucher) =>
         voucher.code === code
@@ -328,16 +315,7 @@ const VoucherManagement = () => {
                 <td>{new Date(voucher.endDate).toLocaleDateString()}</td>
                 <td>{voucher.isActive ? "Kích hoạt" : "Không kích hoạt"}</td>
                 <td>
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation(); // Ngăn chặn sự kiện từ <tr>
-                      toggleVoucherStatus(voucher._id);
-                    }}
-                    style={{
-                      backgroundColor: voucher.isActive ? "red" : " green", // Màu nền tùy vào trạng thái
-                      color: "white", // Màu chữ
-                    }}
-                  >
+                  <button onClick={() => toggleVoucherStatus(voucher.code)}>
                     {voucher.isActive ? "Hủy kích hoạt" : "Kích hoạt"}
                   </button>
                 </td>
@@ -358,7 +336,7 @@ const VoucherManagement = () => {
                 onChange={(e) =>
                   setSelectedVoucher({
                     ...selectedVoucher,
-                    code: e.target.value,
+                    name: e.target.value,
                   })
                 }
               />

@@ -104,7 +104,7 @@ class DriverViewModel {
   // Hàm sửa tài xế
   async updateDriver(driver) {
     try {
-      console.log("Viewmodel", driver);
+      console.log(driver);
       // Kiểm tra xem driver có tất cả các thông tin cần thiết không
       if (
         !driver.id ||

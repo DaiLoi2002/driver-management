@@ -61,64 +61,31 @@ class VoucherViewModel {
       return [];
     }
   }
-  async UpdateVoucher(updatedVoucher) {
+  async UpdateVoucher(newVoucher) {
     try {
-      // Gửi yêu cầu cập nhật voucher
-      const response = await BaseApi.post(
-        "admin/update-voucher",
-        updatedVoucher
-      );
+      console.log(newVoucher);
+      // Kiểm tra xem newVoucher có hợp lệ không
+      if (!newVoucher) {
+        throw new Error("newVoucher là bắt buộc");
+      }
 
-      // Kiểm tra phản hồi từ API
-      if (response && response.data) {
-        console.log("Voucher updated successfully:", response.data);
-        return response.data; // Trả về dữ liệu cập nhật (nếu cần)
+      // Gửi yêu cầu API để thêm voucher
+      const response = await BaseApi.post("admin/addVoucher", newVoucher);
+
+      // Kiểm tra nếu yêu cầu thành công
+      if (response.statusCode === 200) {
+        // Sử dụng 201 cho yêu cầu tạo mới
+        this.vouchers = response.data; // Cập nhật danh sách voucher
+        console.log(response.data);
+        return this.vouchers;
       } else {
-        throw new Error("No data returned from the server");
+        console.error("Lỗi khi thêm voucher:", response.data.message);
+        return [];
       }
     } catch (error) {
-      // Xử lý lỗi khi gửi yêu cầu
-      console.error("Error updating voucher:", error.message);
-      throw new Error("Failed to update voucher"); // Ném lỗi nếu có vấn đề
-    }
-  }
-  async ToggleVoucherActivation(voucherId) {
-    try {
-      // Gửi yêu cầu cập nhật voucher
-      const response = await BaseApi.post("admin/toggle-voucher-activation", {
-        voucherId,
-      });
-
-      // Kiểm tra phản hồi từ API
-      if (response.statusCode === 200 && response.data) {
-        console.log("Voucher updated successfully:", response.data);
-        return response; // Trả về dữ liệu cập nhật (nếu cần)
-      } else {
-        throw new Error("No data returned from the server");
-      }
-    } catch (error) {
-      // Xử lý lỗi khi gửi yêu cầu
-      console.error("Error updating voucher:", error.message);
-      throw new Error("Failed to update voucher"); // Ném lỗi nếu có vấn đề
-    }
-  }
-
-  async DeleteVoucher(voucherId) {
-    try {
-      // Gửi yêu cầu cập nhật voucher
-      const response = await BaseApi.post("admin/delete-voucher", voucherId);
-
-      // Kiểm tra phản hồi từ API
-      if (response && response.data) {
-        console.log("Voucher updated successfully:", response.data);
-        return response.data; // Trả về dữ liệu cập nhật (nếu cần)
-      } else {
-        throw new Error("No data returned from the server");
-      }
-    } catch (error) {
-      // Xử lý lỗi khi gửi yêu cầu
-      console.error("Error updating voucher:", error.message);
-      throw new Error("Failed to update voucher"); // Ném lỗi nếu có vấn đề
+      // Xử lý lỗi API hoặc lỗi trong quá trình gọi API
+      console.error("Lỗi khi thêm voucher:", error.message);
+      return [];
     }
   }
 }

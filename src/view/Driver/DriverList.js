@@ -10,7 +10,6 @@ const DriverList = () => {
     address: "",
     phoneNumber: "",
     email: "",
-    password: "",
     statusAccout: "",
     role: "driver",
     type: "driver",

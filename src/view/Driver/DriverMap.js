@@ -3,6 +3,7 @@ import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import DriverViewModel from "../../viewmodel/DriverViewModel";
 import Truck from "/Users/ttcenter/Manager_LT_Driver/driver-management/src/image/box-truck.png";
+import Bed from "/Users/ttcenter/Manager_LT_Driver/driver-management/src/image/bed.png";
 
 const DriverMap = ({ markerPosition }) => {
   const mapContainerRef = useRef();
@@ -52,6 +53,14 @@ const DriverMap = ({ markerPosition }) => {
             fullName: driver.fullName,
             _id: driver._id,
             coordinates: driver.location.coordinates,
+            totalOrders: driver.totalOrders,
+            completedOrders: driver.completedOrders,
+            cancelledOrders: driver.cancelledOrders,
+            status: driver.status,
+            image: driver.image,
+            isBusy: driver.isBusy,
+            cancelRate: driver.cancelRate,
+            averageRating: driver.averageRating,
           };
         });
         console.log("Converted locations object:", locationsObject); // Log object đã chuyển đổi
@@ -81,7 +90,13 @@ const DriverMap = ({ markerPosition }) => {
             if (!isNaN(lng) && !isNaN(lat)) {
               const el = document.createElement("div");
               el.className = "custom-marker";
-              el.style.backgroundImage = `url(${Truck})`;
+              if (driver.status === "offline") {
+                // Nếu tài xế offline, sử dụng hình ảnh khác
+                el.style.backgroundImage = `url(${Bed})`; // OfflineTruck là hình ảnh của tài xế offline
+              } else {
+                // Nếu tài xế online, sử dụng hình ảnh mặc định
+                el.style.backgroundImage = `url(${Truck})`;
+              }
               el.style.width = "50px";
               el.style.height = "50px";
               el.style.backgroundSize = "contain";
@@ -92,7 +107,48 @@ const DriverMap = ({ markerPosition }) => {
                 .setLngLat([lng, lat])
                 .setPopup(
                   new mapboxgl.Popup().setHTML(
-                    `<h3>${driver.fullName}</h3><h4>ID: ${driver._id}</h4>`
+                    `<img src="${
+                      driver.image
+                    }" alt="Driver Image" style="width: 100%; height: auto;"/>
+                     <h3>${driver.fullName}</h3>
+                     <h6>ID: ${driver._id}</h6>
+                     <h6>Tổng đơn đã nhận: ${driver.totalOrders}</h6>
+                     <h6>Số đơn đã hoàn thành: ${driver.completedOrders}</h6>
+                     <h6>Số đơn đã huỷ: ${driver.cancelledOrders}</h6>
+     <h6>
+  Tỉ lệ huỷ đơn: 
+  <span style="color: ${
+    Math.round(driver.cancelRate * 100) > 20 ? "red" : "green"
+  }; font-size: 1.5em;">
+    ${Math.round(driver.cancelRate * 100)}%
+  </span>
+</h6>
+
+
+                      <h6 style="color: ${
+                        driver.status === "offline"
+                          ? "red" // Đỏ cho trạng thái offline
+                          : driver.isBusy
+                          ? "green"
+                          : "gray" // Xanh nếu đang nhận đơn, xám nếu chờ đơn
+                      };">
+     Trạng thái: ${
+       driver.status === "offline"
+         ? "Đang ngoại tuyến"
+         : driver.isBusy
+         ? "Đang nhận đơn"
+         : "Chờ đơn hàng"
+     }
+   </h6>
+<h6>
+  
+  <span style="font-size: larger; color: gold;">
+    ${"★".repeat(Math.floor(driver.averageRating))}
+    ${"☆".repeat(5 - Math.ceil(driver.averageRating))}
+  </span>
+  (${driver.averageRating.toFixed(1)})
+</h6>
+     `
                   )
                 )
 

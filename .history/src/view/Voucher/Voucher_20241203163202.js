@@ -22,12 +22,10 @@ const VoucherManagement = () => {
 
   const [isModalOpen, setIsModalOpen] = useState(false); // Trạng thái mở/đóng modal
 
-  const [isModalUpdate, setIsModalUpdate] = useState(false); // Trạng thái mở/đóng modal
-  const [selectedVoucher, setSelectedVoucher] = useState(null);
   // Mở modal với voucher đã chọn
   const openModal = (voucher) => {
     setSelectedVoucher(voucher);
-    setIsModalUpdate(true);
+    setIsModalOpen(true);
   };
 
   // Đóng modal
@@ -35,54 +33,26 @@ const VoucherManagement = () => {
     setIsModalOpen(false);
     setSelectedVoucher(null);
   };
-  const fetchVouchers = async () => {
-    const fetchedVouchers = await voucherViewModel.getVoucher(
-      userGroup,
-      isActive
-    );
-    setVouchers(fetchedVouchers);
+
+  // Cập nhật thông tin voucher (ví dụ như tên voucher)
+  const handleUpdateVoucher = () => {
+    // Xử lý cập nhật voucher ở đây, ví dụ gửi yêu cầu API
+    console.log("Updating voucher", selectedVoucher);
+    closeModal();
   };
   useEffect(() => {
+    const fetchVouchers = async () => {
+      const fetchedVouchers = await voucherViewModel.getVoucher(
+        userGroup,
+        isActive
+      );
+      setVouchers(fetchedVouchers);
+    };
+
     fetchVouchers();
   }, [userGroup, isActive]);
 
-  const handleUpdateVoucher = async () => {
-    try {
-      const updatedVoucher = {
-        ...selectedVoucher,
-        voucherId: selectedVoucher._id, // Đổi tên
-      };
-      delete updatedVoucher._id; // Loại bỏ _id để không gửi tới backend
-
-      console.log("Updating voucher", updatedVoucher);
-
-      // Gọi hàm UpdateVoucher để gửi yêu cầu API
-      const updatedVoucherResponse = await voucherViewModel.UpdateVoucher(
-        updatedVoucher
-      );
-
-      // Nếu API cập nhật thành công, đóng modal
-      console.log("Voucher updated successfully:", updatedVoucherResponse);
-      alert("Voucher đã được sửa thành công!");
-      fetchVouchers();
-      closeModal(); // Đóng modal sau khi cập nhật thành công
-    } catch (error) {
-      console.error("Error updating voucher:", error.message);
-      // Nếu có lỗi, có thể hiển thị thông báo lỗi cho người dùng
-      alert("Failed to update voucher: " + error.message);
-    }
-  };
-  const toggleVoucherStatus = async (code) => {
-    try {
-      // Gọi hàm UpdateVoucher để gửi yêu cầu API
-      const updatedVoucherResponse =
-        await voucherViewModel.ToggleVoucherActivation(code);
-      alert(updatedVoucherResponse.message);
-      fetchVouchers();
-    } catch (error) {
-      console.error("Error updating voucher:", error.message);
-    }
-
+  const toggleVoucherStatus = (code) => {
     setVouchers((prevVouchers) =>
       prevVouchers.map((voucher) =>
         voucher.code === code
@@ -328,16 +298,7 @@ const VoucherManagement = () => {
                 <td>{new Date(voucher.endDate).toLocaleDateString()}</td>
                 <td>{voucher.isActive ? "Kích hoạt" : "Không kích hoạt"}</td>
                 <td>
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation(); // Ngăn chặn sự kiện từ <tr>
-                      toggleVoucherStatus(voucher._id);
-                    }}
-                    style={{
-                      backgroundColor: voucher.isActive ? "red" : " green", // Màu nền tùy vào trạng thái
-                      color: "white", // Màu chữ
-                    }}
-                  >
+                  <button onClick={() => toggleVoucherStatus(voucher.code)}>
                     {voucher.isActive ? "Hủy kích hoạt" : "Kích hoạt"}
                   </button>
                 </td>
@@ -346,22 +307,11 @@ const VoucherManagement = () => {
           )}
         </tbody>
       </table>
-      {isModalUpdate && selectedVoucher && (
+      {isModalOpen && selectedVoucher && (
         <div className="modal">
           <div className="modal-content">
             <h2>Sửa Voucher</h2>
             <form>
-              <label>Mã Voucher:</label>
-              <input
-                type="text"
-                value={selectedVoucher.code}
-                onChange={(e) =>
-                  setSelectedVoucher({
-                    ...selectedVoucher,
-                    code: e.target.value,
-                  })
-                }
-              />
               <label>Tên Voucher:</label>
               <input
                 type="text"
@@ -384,7 +334,7 @@ const VoucherManagement = () => {
                   })
                 }
               />
-              <label>Giá trị(%):</label>
+              <label>Giá trị:</label>
               <input
                 type="number"
                 value={selectedVoucher.value}
@@ -395,88 +345,6 @@ const VoucherManagement = () => {
                   })
                 }
               />
-              <label>Giá trị tối thiểu của đơn hàng(VND):</label>
-              <input
-                type="number"
-                value={selectedVoucher.minOrderValue}
-                onChange={(e) =>
-                  setSelectedVoucher({
-                    ...selectedVoucher,
-                    value: e.target.value,
-                  })
-                }
-              />
-              <label>Giảm tối đa(VND):</label>
-              <input
-                type="number"
-                value={selectedVoucher.maxDiscount}
-                onChange={(e) =>
-                  setSelectedVoucher({
-                    ...selectedVoucher,
-                    value: e.target.value,
-                  })
-                }
-              />
-              <label>Ngày bắt đầu:</label>
-              <input
-                type="date"
-                value={
-                  new Date(selectedVoucher.startDate)
-                    .toISOString()
-                    .split("T")[0]
-                } // Đảm bảo định dạng ngày
-                onChange={(e) =>
-                  setSelectedVoucher({
-                    ...selectedVoucher,
-                    startDate: e.target.value,
-                  })
-                }
-              />
-              <label>Ngày kết thúc voucher:</label>
-              <input
-                type="date"
-                value={
-                  new Date(selectedVoucher.endDate).toISOString().split("T")[0]
-                } // Đảm bảo định dạng ngày
-                onChange={(e) =>
-                  setSelectedVoucher({
-                    ...selectedVoucher,
-                    startDate: e.target.value,
-                  })
-                }
-              />
-              {/* Thêm trường ảnh */}
-              <label>Ảnh Voucher:</label>
-              <input
-                type="file"
-                accept="image/*"
-                onChange={(e) => {
-                  const file = e.target.files[0];
-                  if (file) {
-                    // Chuyển file thành URL tạm thời
-                    const reader = new FileReader();
-                    reader.onloadend = () => {
-                      setSelectedVoucher({
-                        ...selectedVoucher,
-                        imageUrl: reader.result, // Lưu URL của ảnh
-                      });
-                    };
-                    reader.readAsDataURL(file);
-                  }
-                }}
-              />
-              {/* Hiển thị ảnh đã chọn */}
-              {selectedVoucher.imageUrl && (
-                <div>
-                  <p>Ảnh hiện tại:</p>
-                  <img
-                    src={selectedVoucher.imageUrl}
-                    alt="Voucher"
-                    width="100"
-                  />
-                </div>
-              )}
-
               {/* Thêm các trường sửa đổi khác nếu cần */}
               <button type="button" onClick={handleUpdateVoucher}>
                 Cập nhật

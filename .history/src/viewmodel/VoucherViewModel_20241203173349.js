@@ -85,14 +85,12 @@ class VoucherViewModel {
   async ToggleVoucherActivation(voucherId) {
     try {
       // Gửi yêu cầu cập nhật voucher
-      const response = await BaseApi.post("admin/toggle-voucher-activation", {
-        voucherId,
-      });
+      const response = await BaseApi.post("admin/update-voucher", voucherId);
 
       // Kiểm tra phản hồi từ API
-      if (response.statusCode === 200 && response.data) {
+      if (response && response.data) {
         console.log("Voucher updated successfully:", response.data);
-        return response; // Trả về dữ liệu cập nhật (nếu cần)
+        return response.data; // Trả về dữ liệu cập nhật (nếu cần)
       } else {
         throw new Error("No data returned from the server");
       }
